@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zhongxi (Jude) Wang</title>
+<meta name="description" content="Zhongxi (Jude) Wang. MEng in Electrical and Computer Engineering from Duke University. I work on multimodal AI assistants and agent evaluation at the Duke CEI Lab.">
+<meta property="og:title" content="Zhongxi (Jude) Wang">
+<meta property="og:description" content="Multimodal AI assistants and agent evaluation. Duke CEI Lab.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://willinx.github.io/">
+<meta property="og:image" content="https://willinx.github.io/assets/photo.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231F4E8C'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' font-weight='600' text-anchor='middle' fill='%23fff'%3EZ%3C/text%3E%3C/svg%3E">
+<script>
+/* Set the language before the first paint. English is the default. */
+(function () {
+  var lang = null;
+  try { lang = new URLSearchParams(location.search).get('lang'); } catch (e) {}
+  if (!lang) { try { lang = localStorage.getItem('lang'); } catch (e) {} }
+  if (lang === 'zh') {
+    document.documentElement.setAttribute('data-lang', 'zh');
+    document.documentElement.setAttribute('lang', 'zh-CN');
+  }
+})();
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Songti SC", serif;
+  --bg: #FFFFFF;
+  --ink: #1D2430;
+  --muted: #5B6474;
+  --accent: #1F4E8C;
+  --line: #E3E7EE;
+  --soft: #F1F4F9;
+  --head-font: var(--serif);
+}
+html[data-lang="zh"] { --head-font: var(--sans); }
+
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 17px/1.65 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+html[data-lang="zh"] body { line-height: 1.8; }
+
+/* Two languages live in the same page. Only one is shown. */
+html[data-lang="en"] .zh,
+html[data-lang="zh"] .en { display: none; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+p { margin: 0 0 12px; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+strong { font-weight: 600; }
+
+.page {
+  position: relative;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 72px 24px 96px;
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 64px;
+  align-items: start;
+}
+
+/* ---------- language button ---------- */
+.lang-toggle {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--ink);
+  font: 14px/1.4 var(--sans);
+  cursor: pointer;
+}
+.lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ---------- left card ---------- */
+.id { position: sticky; top: 48px; display: flex; flex-direction: column; gap: 14px; }
+.avatar {
+  display: block;
+  width: 160px; height: 160px; border-radius: 50%;
+  background: #E8EEF7;
+  object-fit: cover;
+}
+.name { margin: 0; font: 600 32px/1.12 var(--serif); }
+.title { margin: 0; color: var(--muted); font-size: 15.5px; line-height: 1.55; }
+.links { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; font-size: 15px; }
+.links a { overflow-wrap: anywhere; }
+
+/* ---------- right column ---------- */
+main { display: flex; flex-direction: column; gap: 44px; min-width: 0; }
+section h2 { margin: 0 0 16px; font: 600 24px/1.2 var(--head-font); color: var(--ink); }
+.muted { color: var(--muted); }
+
+.note {
+  margin: 16px 0;
+  padding: 12px 16px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  background: var(--soft);
+  font-weight: 600;
+}
+
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { font-size: 13px; line-height: 1.5; padding: 3px 10px; border-radius: 999px; background: var(--soft); color: #33415A; }
+
+.pubs { display: flex; flex-direction: column; gap: 16px; }
+.pubs li { padding-left: 14px; border-left: 3px solid var(--accent); }
+.pubs .pt { font-weight: 600; line-height: 1.45; }
+.pubs .pa, .pubs .pv { color: var(--muted); font-size: 15px; }
+.pubs .pa strong { color: var(--ink); }
+.pubs .pl { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 4px; font-size: 14px; }
+
+.projects { display: grid; gap: 16px; }
+.proj { padding: 18px 20px; border: 1px solid var(--line); border-radius: 10px; }
+.proj h3 { margin: 0 0 6px; font: 600 18px/1.3 var(--head-font); }
+.proj p { color: var(--muted); font-size: 15px; }
+.proj .more { display: inline-block; margin-top: 10px; font-size: 14px; }
+
+.timeline { display: flex; flex-direction: column; gap: 18px; }
+.timeline li { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 16px; }
+.timeline .when { color: var(--muted); font-size: 15px; padding-top: 1px; white-space: nowrap; }
+.timeline .what p { margin: 2px 0 0; color: var(--muted); font-size: 15px; }
+
+.skills { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 10px 16px; margin: 0; }
+.skills dt { color: var(--muted); font-size: 15px; padding-top: 1px; }
+.skills dd { margin: 0; }
+
+.life p { margin-bottom: 14px; }
+.life p:last-child { margin-bottom: 0; }
+
+footer {
+  grid-column: 2;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ---------- phone width ---------- */
+@media (max-width: 760px) {
+  body { font-size: 16px; }
+  .page { display: block; padding: 64px 16px 72px; }
+  .lang-toggle { top: 16px; right: 16px; }
+  .id { position: static; margin-bottom: 40px; }
+  .avatar { width: 112px; height: 112px; }
+  .name { font-size: 28px; }
+  .links { flex-direction: row; flex-wrap: wrap; gap: 8px 18px; }
+  .timeline li, .skills { grid-template-columns: 1fr; gap: 0; }
+  .skills dd { margin-bottom: 10px; }
+  footer { margin-top: 48px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Switch language / 切换语言">
+    <span class="en" lang="zh-CN">中文</span><span class="zh" lang="en">English</span>
+  </button>
+
+  <header class="id">
+    <img class="avatar" src="assets/photo.jpg" width="160" height="160" alt="Photo of Zhongxi Wang">
+    <h1 class="name">Zhongxi (Jude) Wang</h1>
+    <p class="title">
+      <span class="en">MEng in Electrical and Computer Engineering, Duke University<br>Duke CEI Lab</span>
+      <span class="zh">电子与计算机工程硕士（MEng）<br>杜克大学 · Duke CEI Lab</span>
+    </p>
+    <ul class="links">
+      <li><a href="mailto:zhongxi.wang@duke.edu">zhongxi.wang@duke.edu</a></li>
+      <li><a href="https://github.com/WillinX" rel="me">GitHub</a></li>
+      <li><a href="https://scholar.google.com/citations?user=mBOqNfgAAAAJ" rel="me">Google Scholar</a></li>
+      <li><a href="https://www.linkedin.com/in/zhongxi-wang-willinx" rel="me">LinkedIn</a></li>
+    </ul>
+  </header>
+
+  <main>
+
+    <section id="about">
+      <h2><span class="en">About</span><span class="zh">关于</span></h2>
+
+      <div class="en">
+        <p>I finished my MEng in Electrical and Computer Engineering at Duke University in May 2026. I now work with Yueqian Lin and Prof. Yiran Chen at the Duke CEI Lab on multimodal AI assistants.</p>
+        <p>The question I care about is a concrete one: when an AI assistant says “done,” how do we know it really did what the user wanted? So far I have worked on safety evaluation for multimodal models. I am a co-first author of MUSE, a platform that records every turn of an interaction, so that researchers can go back and see what happened. The paper appeared at EMNLP 2026.</p>
+        <p>In the long term, I want to build a personal assistant that works across devices, a little like JARVIS. A central agent coordinates small agents on your watch, phone and computer, and they share conversation memory and task progress. When you move to another device, you keep talking to the same assistant, and it continues the same task.</p>
+        <p class="note">I am applying to PhD programs for Fall 2027.</p>
+      </div>
+
+      <div class="zh">
+        <p>我 2026 年 5 月从杜克大学电子与计算机工程硕士项目（MEng）毕业，现在在 Duke CEI Lab 与 Yueqian Lin 和陈怡然教授合作，研究多模态 AI 助手。</p>
+        <p>我关心一个具体的问题：当 AI 助手说“办好了”，我们怎么知道它真的完成了用户想做的事？到目前为止，我主要做多模态模型的安全评测。我是 MUSE 的共同第一作者。这个平台保存一次交互里每一轮的记录，让研究者可以回看到底发生了什么。论文发表在 EMNLP 2026。</p>
+        <p>长期来看，我想做一个能跨设备工作的个人助手，有点像 JARVIS：由一个中央 agent 协调手表、手机和电脑上的小 agent，它们共享对话记忆和任务进度。换一台设备，你仍然可以和同一个助手接着说、接着做。</p>
+        <p class="note">我正在申请 2027 年秋季入学的博士项目。</p>
+      </div>
+
+      <ul class="tags en" aria-label="Research interests">
+        <li class="tag">Multimodal agents</li>
+        <li class="tag">Agent evaluation</li>
+        <li class="tag">Multimodal model safety</li>
+        <li class="tag">Real-time voice interaction</li>
+        <li class="tag">Computer use</li>
+        <li class="tag">Cross-device personal agents</li>
+        <li class="tag">On-device small models</li>
+      </ul>
+      <ul class="tags zh" aria-label="研究兴趣">
+        <li class="tag">多模态智能体</li>
+        <li class="tag">智能体评测</li>
+        <li class="tag">多模态模型安全</li>
+        <li class="tag">实时语音交互</li>
+        <li class="tag">Computer Use</li>
+        <li class="tag">跨设备个人智能体</li>
+        <li class="tag">端侧小模型</li>
+      </ul>
+    </section>
+
+    <section id="publications">
+      <h2><span class="en">Publications</span><span class="zh">论文</span></h2>
+      <ol class="pubs">
+        <li>
+          <div class="pt"><a href="https://aclanthology.org/2026.emnlp-demos.17/">MUSE: A Run-Centric Platform for Multimodal Unified Safety Evaluation of Large Language Models</a></div>
+          <div class="pa"><strong>Zhongxi Wang</strong>*, Yueqian Lin*, Jingyang Zhang, Zinuo Cheng, Hai “Helen” Li, Yiran Chen</div>
+          <div class="pv">
+            <span class="en">EMNLP 2026 System Demonstrations · Budapest, Hungary · pp. 178–188 · * equal contribution</span>
+            <span class="zh">EMNLP 2026 System Demonstrations · 匈牙利布达佩斯 · 第 178–188 页 · * 共同第一作者</span>
+          </div>
+          <div class="pl">
+            <a href="https://aclanthology.org/2026.emnlp-demos.17/">ACL Anthology</a>
+            <a href="https://aclanthology.org/2026.emnlp-demos.17.pdf">PDF</a>
+            <a href="https://doi.org/10.18653/2026.emnlp-demos.17">DOI</a>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="projects">
+      <h2><span class="en">Projects</span><span class="zh">项目</span></h2>
+      <div class="projects">
+
+        <article class="proj">
+          <h3>MUSE</h3>
+          <p class="en">A browser-based platform for safety evaluation of multimodal LLMs. It saves each attack run as a complete record: the configuration, every turn, the media that was sent, the model’s responses and the safety judgments. You can replay a multi-turn interaction across text, image, audio and video, and see at which turn the model’s behavior changed.</p>
+          <p class="zh">基于浏览器的多模态大模型安全评测平台。它把每一次攻击运行完整保存下来，包括配置、每一轮对话、发送的媒体、模型的回答和安全评判。你可以回放跨文本、图像、音频和视频的多轮交互，查看模型的表现在哪一轮发生变化。</p>
+          <ul class="tags"><li class="tag">React</li><li class="tag">FastAPI</li><li class="tag">vLLM-Omni</li></ul>
+          <a class="more" href="https://aclanthology.org/2026.emnlp-demos.17/"><span class="en">Paper →</span><span class="zh">论文 →</span></a>
+        </article>
+
+        <article class="proj">
+          <h3>UPlug</h3>
+          <p class="en">A Linux daemon that starts a backup automatically when you plug in a USB storage device. It can restore files from a snapshot or rebuild a partition table. Personal project, Feb – Apr 2026.</p>
+          <p class="zh">一个 Linux 守护进程：插入 USB 存储设备后自动开始备份，可以从快照恢复文件，也可以重建分区表。个人项目，2026.02 – 2026.04。</p>
+          <ul class="tags"><li class="tag">Python</li><li class="tag">Linux</li><li class="tag">pyudev</li><li class="tag">asyncio</li><li class="tag">FastAPI</li></ul>
+        </article>
+
+        <article class="proj">
+          <h3><span class="en">Alumni management system</span><span class="zh">校友管理系统</span></h3>
+          <p class="en">An alumni management system built for a school. It has two clients: a web app and a WeChat Mini Program.</p>
+          <p class="zh">为一所学校开发的校友管理系统，有网页端和微信小程序两个客户端。</p>
+          <ul class="tags en"><li class="tag">Web app</li><li class="tag">WeChat Mini Program</li></ul>
+          <ul class="tags zh"><li class="tag">网页端</li><li class="tag">微信小程序</li></ul>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2><span class="en">Experience</span><span class="zh">经历</span></h2>
+      <ol class="timeline">
+        <li>
+          <span class="when"><span class="en">2025 – present</span><span class="zh">2025 – 至今</span></span>
+          <div class="what">
+            <strong>Duke CEI Lab</strong><span class="en">, Duke University</span><span class="zh">，杜克大学</span>
+            <p class="en">Research on multimodal agents and safety evaluation, with Yueqian Lin and Prof. Yiran Chen. Co-first author of MUSE, presented at EMNLP 2026 in Budapest.</p>
+            <p class="zh">与 Yueqian Lin 和陈怡然教授合作，研究多模态智能体和安全评测。MUSE 共同第一作者，论文在布达佩斯的 EMNLP 2026 展示。</p>
+          </div>
+        </li>
+        <li>
+          <span class="when"><span class="en">May – Aug 2025</span><span class="zh">2025.05 – 2025.08</span></span>
+          <div class="what">
+            <span class="en"><strong>China Mobile, Chongqing</strong> · Backend Engineering Intern</span>
+            <span class="zh"><strong>中国移动重庆公司</strong> · 后端开发实习生</span>
+            <p class="en">Built Spring Boot services and more than 15 REST APIs for a drone flight management platform. Handled concurrent authentication, and used Kafka for asynchronous tasks and notifications.</p>
+            <p class="zh">为无人机飞行管理平台开发 Spring Boot 服务和 15 个以上 REST API，处理并发鉴权，并用 Kafka 实现异步任务与通知。</p>
+          </div>
+        </li>
+        <li>
+          <span class="when"><span class="en">Jul – Aug 2023</span><span class="zh">2023.07 – 2023.08</span></span>
+          <div class="what">
+            <span class="en"><strong>Inspur Genersoft</strong> · Software Engineering Intern, ERP</span>
+            <span class="zh"><strong>浪潮通用软件有限公司</strong> · 软件工程实习生（ERP 系统）</span>
+            <p class="en">Wrote database initialization and deployment scripts, built end-to-end black-box tests, and took part in release deployment and troubleshooting.</p>
+            <p class="zh">编写数据库初始化与部署脚本，开发端到端黑盒测试，参与上线部署和故障排查。</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="education">
+      <h2><span class="en">Education</span><span class="zh">教育</span></h2>
+      <ol class="timeline">
+        <li>
+          <span class="when"><span class="en">Aug 2024 – May 2026</span><span class="zh">2024.08 – 2026.05</span></span>
+          <div class="what">
+            <span class="en"><strong>Duke University</strong>, Pratt School of Engineering</span>
+            <span class="zh"><strong>杜克大学</strong> Pratt 工程学院</span>
+            <p class="en">Master of Engineering (MEng), Electrical and Computer Engineering · GPA 3.71/4.0</p>
+            <p class="zh">电子与计算机工程，工程硕士（MEng）· GPA 3.71/4.0</p>
+          </div>
+        </li>
+        <li>
+          <span class="when"><span class="en">Sep 2020 – Jun 2024</span><span class="zh">2020.09 – 2024.06</span></span>
+          <div class="what">
+            <span class="en"><strong>University of Leeds</strong> and <strong>Southwest Jiaotong University</strong>, joint program</span>
+            <span class="zh"><strong>西南交通大学</strong> × <strong>利兹大学</strong> 联合项目</span>
+            <p class="en">BSc, Computer Science · GPA 3.74/4.0 · First Class Honours, University of Leeds</p>
+            <p class="zh">计算机科学，理学学士（BSc）· GPA 3.74/4.0 · 利兹大学一等荣誉学位</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="skills">
+      <h2><span class="en">Skills</span><span class="zh">技能</span></h2>
+      <dl class="skills">
+        <dt><span class="en">Programming</span><span class="zh">编程语言</span></dt>
+        <dd>Python, C, C++, Java, JavaScript, SQL, Verilog</dd>
+        <dt><span class="en">AI and systems</span><span class="zh">AI 与系统</span></dt>
+        <dd>
+          <span class="en">PyTorch, vLLM, FastAPI, Spring Boot, Kafka, Docker, Linux, Git. Parallel computing with MPI, OpenMP and OpenCL.</span>
+          <span class="zh">PyTorch、vLLM、FastAPI、Spring Boot、Kafka、Docker、Linux、Git。也用过 MPI、OpenMP、OpenCL 做并行计算。</span>
+        </dd>
+        <dt><span class="en">Languages</span><span class="zh">语言</span></dt>
+        <dd>
+          <span class="en">Chinese (native), English (fluent), Japanese (JLPT N2)</span>
+          <span class="zh">中文（母语）、英语（流利）、日语（JLPT N2）</span>
+        </dd>
+      </dl>
+    </section>
+
+    <section id="life">
+      <h2><span class="en">Beyond research</span><span class="zh">研究之外</span></h2>
+
+      <div class="life en">
+        <p><strong>Football.</strong> I have played since second grade, and I still play. I have played in school, district, city and provincial competitions. My favorite positions are striker and attacking midfielder. In high school I played centre-back for the school team. In college, my department team needed a defensive midfielder, so I moved back to protect the back line, support my teammates and distribute the ball. I was captain of that team for two years, starting in my third year, and I made many friends there. I support FC Barcelona, and Messi is my favorite player.</p>
+        <p><strong>AI × music, AI × football.</strong> Outside my main research, I am curious about what AI can do with music and with football.</p>
+        <p><strong>Running.</strong> I also run. My usual run is 10 km in one hour, at a pace of 6 min/km.</p>
+        <p><strong>The name “Willinx.”</strong> It is a name I once gave myself: <em>willing</em> without the <em>g</em>, plus an <em>x</em> for unlimited possibilities. People often read it as “William.” Now I go by Jude.</p>
+      </div>
+
+      <div class="life zh">
+        <p><strong>足球。</strong>我从小学二年级开始踢球，一直踢到现在，踢过校级、区级、市级和省级比赛。我最喜欢踢前锋和前腰。高中在校队踢中后卫；大学时院队缺后腰，我就回撤，负责护住后防线、接应队友和调度出球。从大三开始，我连续两年担任院队队长，也在队里认识了很多朋友。我是巴萨球迷，最喜欢的球员是梅西。</p>
+        <p><strong>AI × 音乐，AI × 足球。</strong>主线研究之外，我对 AI 在音乐和足球上能做什么也很感兴趣。</p>
+        <p><strong>跑步。</strong>我也跑步，一般是 6 分配，一个小时跑 10 公里。</p>
+        <p><strong>Willinx 这个名字。</strong>这是我以前给自己起的名字：取自 <em>willing</em>，去掉 <em>g</em>，再加一个代表无限可能的 <em>x</em>。结果大家经常把它读成 William。现在我的英文名是 Jude。</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span class="en">© 2026 Zhongxi Wang · Last updated November 2026</span>
+    <span class="zh">© 2026 Zhongxi Wang · 最后更新于 2026 年 11 月</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var button = document.getElementById('lang-toggle');
+  button.addEventListener('click', function () {
+    var next = root.getAttribute('data-lang') === 'zh' ? 'en' : 'zh';
+    root.setAttribute('data-lang', next);
+    root.setAttribute('lang', next === 'zh' ? 'zh-CN' : 'en');
+    try { localStorage.setItem('lang', next); } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>
