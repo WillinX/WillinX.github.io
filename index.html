@@ -137,7 +137,9 @@ html[data-lang="zh"] .thesis { letter-spacing: 0; line-height: 1.24; font-size: 
 .status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sun); flex: none; }
 .contact { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 15px; }
 
-.portrait { margin: 0; aspect-ratio: 4 / 5; border-radius: 6px; overflow: hidden; background: var(--line); animation: unveil 1.2s cubic-bezier(.7, 0, .2, 1) .15s both; }
+.portrait { margin: 0; }
+.portrait .frame { aspect-ratio: 4 / 5; border-radius: 6px; overflow: hidden; background: var(--line); animation: unveil 1.2s cubic-bezier(.7, 0, .2, 1) .15s both; }
+.portrait figcaption { margin-top: 12px; font-size: 14px; line-height: 1.55; color: var(--muted); }
 .portrait img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 44%; animation: settle 1.6s cubic-bezier(.2, .7, .2, 1) .15s both; }
 @keyframes unveil { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
 @keyframes settle { from { transform: scale(1.1); } to { transform: none; } }
@@ -287,15 +289,19 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8p
         <p class="status"><span class="dot" aria-hidden="true"></span><span class="en">Applying to PhD programs for Fall 2027</span><span class="zh">正在申请 2027 年秋季入学的博士项目</span></p>
         <ul class="contact">
           <li><a href="mailto:zhongxi.wang@duke.edu">zhongxi.wang@duke.edu</a></li>
-          <li><a href="https://github.com/WillinX" rel="me">GitHub</a></li>
-          <li><a href="https://scholar.google.com/citations?user=mBOqNfgAAAAJ" rel="me">Google Scholar</a></li>
-          <li><a href="https://www.linkedin.com/in/zhongxi-wang-willinx" rel="me">LinkedIn</a></li>
+          <li><a href="https://github.com/WillinX" rel="me noopener" target="_blank">GitHub</a></li>
+          <li><a href="https://scholar.google.com/citations?user=mBOqNfgAAAAJ" rel="me noopener" target="_blank">Google Scholar</a></li>
+          <li><a href="https://www.linkedin.com/in/zhongxi-wang-willinx" rel="me noopener" target="_blank">LinkedIn</a></li>
         </ul>
       </div>
     </div>
 
     <figure class="portrait">
-      <img src="assets/hero.jpg" width="960" height="1280" alt="Zhongxi Wang by a lake at sunset, wearing a Duke sweatshirt">
+      <div class="frame"><img src="assets/hero.jpg" width="960" height="1280" alt="Zhongxi Wang at EPCOT at sunset, wearing a Duke sweatshirt"></div>
+      <figcaption class="rise" style="--i:10">
+        <span class="en">At EPCOT, Walt Disney World. I love Orlando: it has both Disney and Universal.</span>
+        <span class="zh">摄于迪士尼 EPCOT。我超喜欢奥兰多，那里有迪士尼和环球影城。</span>
+      </figcaption>
     </figure>
   </section>
 
@@ -327,13 +333,13 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8p
           <span class="en">EMNLP 2026 · System Demonstrations · Budapest · pp. 178–188</span>
           <span class="zh">EMNLP 2026 · System Demonstrations · 布达佩斯 · 第 178–188 页</span>
         </p>
-        <h3 class="pub-title"><a href="https://aclanthology.org/2026.emnlp-demos.17/">MUSE: A Run-Centric Platform for Multimodal Unified Safety Evaluation of Large Language Models</a></h3>
+        <h3 class="pub-title"><a href="https://aclanthology.org/2026.emnlp-demos.17/" target="_blank" rel="noopener">MUSE: A Run-Centric Platform for Multimodal Unified Safety Evaluation of Large Language Models</a></h3>
         <p class="pub-authors"><strong>Zhongxi Wang</strong>*, Yueqian Lin*, Jingyang Zhang, Zinuo Cheng, Hai “Helen” Li, Yiran Chen<br><span class="en">* equal contribution</span><span class="zh">* 共同第一作者</span></p>
         <p class="btns">
-          <a href="https://aclanthology.org/2026.emnlp-demos.17/">ACL Anthology</a>
-          <a href="https://aclanthology.org/2026.emnlp-demos.17.pdf">PDF</a>
-          <a href="https://youtu.be/rZHPQ3fRoI0"><span class="en">Demo video</span><span class="zh">演示视频</span></a>
-          <a href="https://doi.org/10.18653/2026.emnlp-demos.17">DOI</a>
+          <a href="https://aclanthology.org/2026.emnlp-demos.17/" target="_blank" rel="noopener">ACL Anthology</a>
+          <a href="https://aclanthology.org/2026.emnlp-demos.17.pdf" target="_blank" rel="noopener">PDF</a>
+          <a href="https://youtu.be/rZHPQ3fRoI0" target="_blank" rel="noopener"><span class="en">Demo video</span><span class="zh">演示视频</span></a>
+          <a href="https://doi.org/10.18653/2026.emnlp-demos.17" target="_blank" rel="noopener">DOI</a>
         </p>
       </article>
     </div>
@@ -348,8 +354,8 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8p
         <p class="desc en">A browser-based platform for safety evaluation of multimodal LLMs. It saves each attack run as a complete record: the configuration, every turn, the media that was sent, the model’s responses and the safety judgments. You can replay a multi-turn interaction across text, image, audio and video, and see at which turn the model’s behavior changed.</p>
         <p class="desc zh">基于浏览器的多模态大模型安全评测平台。它把每一次攻击运行完整保存下来，包括配置、每一轮对话、发送的媒体、模型的回答和安全评判。你可以回放跨文本、图像、音频和视频的多轮交互，查看模型的表现在哪一轮发生变化。</p>
         <p class="more">
-          <a href="https://aclanthology.org/2026.emnlp-demos.17/"><span class="en">Paper</span><span class="zh">论文</span></a>
-          <a href="https://youtu.be/rZHPQ3fRoI0"><span class="en">Demo video</span><span class="zh">演示视频</span></a>
+          <a href="https://aclanthology.org/2026.emnlp-demos.17/" target="_blank" rel="noopener"><span class="en">Paper</span><span class="zh">论文</span></a>
+          <a href="https://youtu.be/rZHPQ3fRoI0" target="_blank" rel="noopener"><span class="en">Demo video</span><span class="zh">演示视频</span></a>
         </p>
       </article>
 
